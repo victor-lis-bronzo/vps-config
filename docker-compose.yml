@@ -120,6 +120,7 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - local-network
+      - proxy-network
     depends_on:
       - n8n
       - evolution
@@ -142,3 +143,5 @@ volumes:
 networks:
   local-network:
     driver: bridge
+  proxy-network:
+    external: true
