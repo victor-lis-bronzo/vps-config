@@ -15,8 +15,13 @@ http {
         listen 80;
         server_name ${EVO_DOMAIN};
 
-        # Redireciona HTTP para HTTPS
-        return 301 https://$host$request_uri;
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+        }
+
+        location / {
+            return 301 https://$host$request_uri;
+        }
     }
 
     server {
@@ -65,7 +70,14 @@ http {
     server {
         listen 80;
         server_name ${PORTAINER_DOMAIN};
-        return 301 https://$host$request_uri;
+
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+        }
+
+        location / {
+            return 301 https://$host$request_uri;
+        }
     }
 
     server {
@@ -89,7 +101,14 @@ http {
     server {
         listen 80;
         server_name ${N8N_DOMAIN};
-        return 301 https://$host$request_uri;
+
+        location /.well-known/acme-challenge/ {
+            root /var/www/certbot;
+        }
+
+        location / {
+            return 301 https://$host$request_uri;
+        }
     }
 
     server {
